@@ -1,0 +1,17 @@
+
+插入
+create trigger triCopy_Stu2Borrow
+on Info_Stu
+after insert
+as 
+begin insert into Info_Borrow(Name) 
+select Name from Info_Stu
+end
+
+更新
+create trigger triDelete_Stu2Borrow
+on Info_Stu
+after delete
+as begin delete Info_Borrow
+where Name in (select Name from deleted)
+end
